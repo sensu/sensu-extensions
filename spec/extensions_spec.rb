@@ -37,4 +37,10 @@ describe "Sensu::Extensions" do
     extensions.loaded_files.size.should eq(1)
     extensions.handler_exists?("test").should be_true
   end
+
+  it "can load the built-in extensions" do
+    extensions = Sensu::Extensions.load
+    extensions.mutator_exists?("only_check_output").should be_true
+    extensions.handler_exists?("debug").should be_true
+  end
 end

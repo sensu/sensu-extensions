@@ -53,16 +53,27 @@ describe "Sensu::Extensions::Loader" do
     @loader.loaded_files.should be_empty
   end
 
-  it "can load instances of extensions and provide accessors" do
+  it "can load instances of the built-in extensions and provide accessors" do
+    @loader.load_instances
+    @loader.handler_exists?("debug").should be_true
+    extension = @loader[:handlers]["debug"]
+    extension.should be_instance_of(Sensu::Extension::Debug)
+    extension.should respond_to(:name, :description, :definition, :safe_run, :stop, :has_key?, :[])
+    @loader.handlers.should include(extension.definition)
+    @loader.all.should include(extension)
+    @loader.mutator_exists?("only_check_output").should be_true
+  end
+
+  it "can load instances of the built-in and loaded extensions" do
     @loader.load_file(@extension_file)
     @loader.load_instances
     @loader.handler_exists?("test").should be_true
     extension = @loader[:handlers]["test"]
     extension.should be_instance_of(Sensu::Extension::Test)
     extension.should respond_to(:name, :description, :definition, :safe_run, :stop, :has_key?, :[])
-    @loader.handlers.size.should eq(1)
-    @loader.handlers.first.should eq(extension.definition)
-    @loader.all.size.should eq(1)
-    @loader.all.first.should be_instance_of(Sensu::Extension::Test)
+    @loader.handlers.should include(extension.definition)
+    @loader.all.should include(extension)
+    @loader.handler_exists?("debug").should be_true
+    @loader.mutator_exists?("only_check_output").should be_true
   end
 end
