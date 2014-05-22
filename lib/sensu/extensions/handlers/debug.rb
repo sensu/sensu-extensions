@@ -8,7 +8,7 @@ module Sensu
       end
 
       def description
-        "outputs inspected event data"
+        "returns inspected event data"
       end
 
       def run(event)
