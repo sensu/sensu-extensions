@@ -12,21 +12,60 @@ module Sensu
       attr_reader :loaded_files
 
       def initialize
-        @loaded_files = []
         @warnings = []
+        @loaded_files = []
+        @extensions = {}
+        Extension::CATEGORIES.each do |category|
+          @extensions[category] = {}
+        end
+        self.class.create_category_methods
+      end
+
+      # Create extension category accessors and methods to test the
+      # existence of extensions. Called in initialize().
+      def self.create_category_methods
+        Extension::CATEGORIES.each do |category|
+          define_method(category) do
+            extension_category(category)
+          end
+          method_name = category.to_s.chop + "_exists?"
+          define_method(method_name.to_sym) do |name|
+            extension_exists?(category, name)
+          end
+        end
+      end
+
+      # Retrieve the extension object corresponding to a key, acting
+      # like a Hash object.
+      #
+      # @param key [Symbol]
+      # @return [Object] value for key.
+      def [](key)
+        @extensions[key]
+      end
+
+      # Retrieve all extension instances.
+      #
+      # @return [Array<object>] extensions.
+      def all
+        @extensions.map { |category, extensions|
+          extensions.map do |name, extension|
+            extension
+          end
+        }.flatten
       end
 
       # Load an extension from a file.
       #
       # @param [String] file path.
       def load_file(file)
-        warning(file, "loading extension file")
+        warning("loading extension file", :file => file)
         begin
           require File.expand_path(file)
           @loaded_files << file
         rescue ScriptError, StandardError => error
-          warning(file, "failed to require extension: #{error}")
-          warning(file, "ignoring extension")
+          warning("failed to require extension", :file => file, :error => error)
+          warning("ignoring extension", :file => file)
         end
       end
 
@@ -35,25 +74,59 @@ module Sensu
       #
       # @param [String] directory path.
       def load_directory(directory)
-        warning(directory, "loading extension files from directory")
+        warning("loading extension files from directory", :directory => directory)
         path = directory.gsub(/\\(?=\S)/, "/")
         Dir.glob(File.join(path, "**/*.rb")).each do |file|
           load_file(file)
         end
       end
 
+      # Load instances of the loaded extensions.
+      def load_instances
+        Extension::CATEGORIES.each do |category|
+          extension_type = category.to_s.chop
+          Extension.const_get(extension_type.capitalize).descendants.each do |klass|
+            extension = klass.new
+            @extensions[category][extension.name] = extension
+            warning("loaded extension", {
+              :type => extension_type,
+              :name => extension.name,
+              :description => extension.description
+            })
+          end
+        end
+      end
+
       private
 
-      # Record a warning for an object.
+      # Retrieve extension category definitions.
       #
-      # @param object [Object] under suspicion.
+      # @param [Symbol] category to retrive.
+      # @return [Array<Hash>] category definitions.
+      def extension_category(category)
+        @extensions[category].map do |name, extension|
+          extension.definition
+        end
+      end
+
+      # Check to see if an extension exists in a category.
+      #
+      # @param [Symbol] category to inspect for the extension.
+      # @param [String] name of extension.
+      # @return [TrueClass, FalseClass]
+      def extension_exists?(category, name)
+        @extensions[category].has_key?(name)
+      end
+
+      # Record a warning.
+      #
       # @param message [String] warning message.
+      # @param data [Hash] warning context.
       # @return [Array] current warnings.
-      def warning(object, message)
+      def warning(message, data={})
         @warnings << {
-          :object => object,
           :message => message
-        }
+        }.merge(data)
       end
     end
   end

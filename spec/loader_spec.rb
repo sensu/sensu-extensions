@@ -12,7 +12,9 @@ describe "Sensu::Extensions::Loader" do
   end
 
   it "can provide the extensions loader API" do
-    @loader.should respond_to(:load_file, :load_directory, :warnings, :loaded_files)
+    @loader.should respond_to(:load_file, :load_directory, :load_instances,
+                              :warnings, :loaded_files, :[], :all,
+                              :generics, :bridges, :checks, :mutators, :handlers)
   end
 
   it "can load an extension from a file" do
@@ -49,5 +51,18 @@ describe "Sensu::Extensions::Loader" do
     @loader.load_directory("/tmp/bananaphone")
     @loader.warnings.size.should eq(1)
     @loader.loaded_files.should be_empty
+  end
+
+  it "can load instances of extensions and provide accessors" do
+    @loader.load_file(@extension_file)
+    @loader.load_instances
+    @loader.handler_exists?("test").should be_true
+    extension = @loader[:handlers]["test"]
+    extension.should be_instance_of(Sensu::Extension::Test)
+    extension.should respond_to(:name, :description, :definition, :safe_run, :stop, :has_key?, :[])
+    @loader.handlers.size.should eq(1)
+    @loader.handlers.first.should eq(extension.definition)
+    @loader.all.size.should eq(1)
+    @loader.all.first.should be_instance_of(Sensu::Extension::Test)
   end
 end

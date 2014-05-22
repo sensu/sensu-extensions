@@ -5,8 +5,8 @@ Gem::Specification.new do |spec|
   spec.version       = "0.0.1"
   spec.authors       = ["Sean Porter"]
   spec.email         = ["portertech@gmail.com"]
-  spec.summary       = "Sensu extension loader library"
-  spec.description   = "Sensu extension loader library"
+  spec.summary       = "The Sensu extension loader library"
+  spec.description   = "The Sensu extension loader library"
   spec.homepage      = "https://github.com/sensu/sensu-extensions"
   spec.license       = "MIT"
 
