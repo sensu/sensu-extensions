@@ -6,6 +6,9 @@ rvm:
   - 2.0.0
   - 2.1.0
   - jruby
+notifications:
+  irc:
+    - "irc.freenode.net#sensu"
 addons:
   code_climate:
     repo_token: e2001d0db82d5835d76a70d025388fee457bd4243fda3e046097e9d6db28fe5d
