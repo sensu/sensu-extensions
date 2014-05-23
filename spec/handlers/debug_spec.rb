@@ -8,7 +8,7 @@ describe "Sensu::Extension::Debug" do
     @extension = Sensu::Extension::Debug.new
   end
 
-  it "can run, returning an inspected event data" do
+  it "can run, returning raw event data" do
     event = {
       :client => {},
       :check => {
@@ -17,7 +17,7 @@ describe "Sensu::Extension::Debug" do
       }
     }
     @extension.safe_run(event) do |output, status|
-      output.should eq(event.inspect)
+      output.should eq(event)
       status.should eq(0)
     end
   end

@@ -8,11 +8,11 @@ module Sensu
       end
 
       def description
-        "returns inspected event data"
+        "returns raw event data"
       end
 
       def run(event)
-        yield event.inspect, 0
+        yield event, 0
       end
     end
   end
