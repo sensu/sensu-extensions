@@ -47,10 +47,4 @@ describe "Sensu::Extensions" do
     extensions.mutator_exists?("only_check_output").should be_true
     extensions.handler_exists?("debug").should be_true
   end
-
-  it "can load specific extension categories for a sensu service" do
-    extensions = Sensu::Extensions.load(:service => "client")
-    extensions.check_exists?("mock_check").should be_true
-    extensions.mutator_exists?("only_check_output").should be_false
-  end
 end

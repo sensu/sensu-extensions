@@ -89,6 +89,7 @@ module Sensu
       #
       # @param [String] sensu service to load extensions for.
       def load_instances(service=nil)
+        service ||= sensu_service_name
         categories_to_load(service).each do |category|
           extension_type = category.to_s.chop
           Extension.const_get(extension_type.capitalize).descendants.each do |klass|
@@ -122,6 +123,13 @@ module Sensu
       # @return [TrueClass, FalseClass]
       def extension_exists?(category, name)
         @extensions[category].has_key?(name)
+      end
+
+      # Retrieve Sensu service name.
+      #
+      # @return [String] service name.
+      def sensu_service_name
+        File.basename($0).split("-").last
       end
 
       # Determine which extension categories to load for the given
