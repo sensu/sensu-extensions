@@ -14,7 +14,7 @@ describe "Sensu::Extensions::Loader" do
   it "can provide the extensions loader API" do
     @loader.should respond_to(:load_file, :load_directory, :load_instances,
                               :warnings, :loaded_files, :[], :all,
-                              :generics, :bridges, :checks, :mutators, :handlers)
+                              :bridges, :checks, :mutators, :handlers)
   end
 
   it "can load an extension from a file" do

@@ -132,7 +132,7 @@ module Sensu
       def categories_to_load(service)
         case service
         when "client"
-          [:generics, :checks]
+          [:checks]
         when "server"
           Extension::CATEGORIES.reject { |category| category == :checks }
         else
