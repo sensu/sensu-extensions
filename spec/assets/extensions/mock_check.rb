@@ -1,16 +1,16 @@
 module Sensu
   module Extension
-    class Test < Handler
+    class MockCheck < Check
       def name
-        "test"
+        "mock_check"
       end
 
       def description
-        "test extension"
+        "returns 'foo'"
       end
 
-      def run(event)
-        yield event, 0
+      def run
+        yield 'foo', 0
       end
     end
   end

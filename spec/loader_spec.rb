@@ -41,9 +41,11 @@ describe "Sensu::Extensions::Loader" do
 
   it "can load extensions from a directory" do
     @loader.load_directory(@extension_dir)
-    @loader.warnings.size.should eq(5)
-    @loader.loaded_files.size.should eq(1)
+    @loader.warnings.size.should eq(6)
+    @loader.loaded_files.size.should eq(2)
     extension = Sensu::Extension::Test.new
+    extension.should respond_to(:name, :description, :definition, :safe_run, :stop, :has_key?, :[])
+    extension = Sensu::Extension::MockCheck.new
     extension.should respond_to(:name, :description, :definition, :safe_run, :stop, :has_key?, :[])
   end
 
@@ -77,5 +79,19 @@ describe "Sensu::Extensions::Loader" do
     @loader.all.should include(extension)
     @loader.handler_exists?("debug").should be_true
     @loader.mutator_exists?("only_check_output").should be_true
+  end
+
+  it "can load specific extension categories for a sensu client" do
+    @loader.load_instances("client")
+    @loader.handler_exists?("debug").should be_false
+    @loader.mutator_exists?("only_check_output").should be_false
+    @loader.check_exists?("mock_check").should be_true
+  end
+
+  it "can load specific extension categories for a sensu server" do
+    @loader.load_instances("server")
+    @loader.handler_exists?("debug").should be_true
+    @loader.mutator_exists?("only_check_output").should be_true
+    @loader.check_exists?("mock_check").should be_false
   end
 end

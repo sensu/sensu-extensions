@@ -8,6 +8,7 @@ module Sensu
     # @option options [String] :extension_file to load.
     # @option options [String] :extension_dir to load.
     # @option options [Array] :extension_dirs to load.
+    # @option options [String] :service to load extensions for.
     # @return [Loader] a loaded instance of Loader.
     def self.load(options={})
       loader = Loader.new
@@ -22,7 +23,8 @@ module Sensu
           loader.load_directory(directory)
         end
       end
-      loader.load_instances
+      service = options[:service] || File.basename($0).split("-").last
+      loader.load_instances(service)
       loader
     end
   end

@@ -86,8 +86,10 @@ module Sensu
       end
 
       # Load instances of the loaded extensions.
-      def load_instances
-        Extension::CATEGORIES.each do |category|
+      #
+      # @param [String] sensu service to load extensions for.
+      def load_instances(service=nil)
+        categories_to_load(service).each do |category|
           extension_type = category.to_s.chop
           Extension.const_get(extension_type.capitalize).descendants.each do |klass|
             extension = klass.new
@@ -120,6 +122,22 @@ module Sensu
       # @return [TrueClass, FalseClass]
       def extension_exists?(category, name)
         @extensions[category].has_key?(name)
+      end
+
+      # Determine which extension categories to load for the given
+      # sensu service.
+      #
+      # @param [String] sensu service to load extensions for.
+      # @return [Array] extension categories.
+      def categories_to_load(service)
+        case service
+        when "client"
+          [:generics, :checks]
+        when "server"
+          Extension::CATEGORIES.reject { |category| category == :checks }
+        else
+          Extension::CATEGORIES
+        end
       end
 
       # Record a warning.

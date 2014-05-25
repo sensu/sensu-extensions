@@ -28,19 +28,29 @@ describe "Sensu::Extensions" do
 
   it "can load extensions from a directory" do
     extensions = Sensu::Extensions.load(:extension_dir => @extension_dir)
-    extensions.loaded_files.size.should eq(1)
+    extensions.loaded_files.size.should eq(2)
     extensions.handler_exists?("test").should be_true
+    extensions.check_exists?("mock_check").should be_true
   end
 
   it "can load extensions from one or more directories" do
     extensions = Sensu::Extensions.load(:extension_dirs => [@extension_dir])
-    extensions.loaded_files.size.should eq(1)
+    extensions.loaded_files.size.should eq(2)
     extensions.handler_exists?("test").should be_true
+    extensions.check_exists?("mock_check").should be_true
   end
 
   it "can load the built-in extensions" do
     extensions = Sensu::Extensions.load
+    extensions.mutator_exists?("json").should be_true
+    extensions.mutator_exists?("ruby_hash").should be_true
     extensions.mutator_exists?("only_check_output").should be_true
     extensions.handler_exists?("debug").should be_true
+  end
+
+  it "can load specific extension categories for a sensu service" do
+    extensions = Sensu::Extensions.load(:service => "client")
+    extensions.check_exists?("mock_check").should be_true
+    extensions.mutator_exists?("only_check_output").should be_false
   end
 end

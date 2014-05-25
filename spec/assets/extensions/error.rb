@@ -9,8 +9,8 @@ module Sensu
         "error extension"
       end
 
-      def run(event, &callback)
-        block.call(event, 0)
+      def run(event)
+        yield event, 0
       end
     end
   end
