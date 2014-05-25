@@ -61,6 +61,8 @@ describe "Sensu::Extensions::Loader" do
     extension.should respond_to(:name, :description, :definition, :safe_run, :stop, :has_key?, :[])
     @loader.handlers.should include(extension.definition)
     @loader.all.should include(extension)
+    @loader.mutator_exists?("json").should be_true
+    @loader.mutator_exists?("ruby_hash").should be_true
     @loader.mutator_exists?("only_check_output").should be_true
   end
 

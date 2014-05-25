@@ -1,4 +1,6 @@
 require "sensu/extension"
+require "sensu/extensions/mutators/json"
+require "sensu/extensions/mutators/ruby_hash"
 require "sensu/extensions/mutators/only_check_output"
 require "sensu/extensions/handlers/debug"
 
