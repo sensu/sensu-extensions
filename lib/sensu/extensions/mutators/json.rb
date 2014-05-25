@@ -1,4 +1,5 @@
 require "sensu/extension"
+require "multi_json"
 
 module Sensu
   module Extension
