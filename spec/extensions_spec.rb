@@ -20,6 +20,18 @@ describe "Sensu::Extensions" do
     extensions.loaded_files.should be_empty
   end
 
+  it "can retrive the current loaded loader" do
+    extensions = Sensu::Extensions.load
+    Sensu::Extensions.get.should eq(extensions)
+    Sensu::Extensions.get.should eq(extensions)
+  end
+
+  it "can load up a loader if one doesn't exist" do
+    extensions = Sensu::Extensions.get
+    extensions.should be_an_instance_of(Sensu::Extensions::Loader)
+    Sensu::Extensions.get.should eq(extensions)
+  end
+
   it "can load an extension from a file" do
     extensions = Sensu::Extensions.load(:extension_file => @extension_file)
     extensions.loaded_files.size.should eq(1)
