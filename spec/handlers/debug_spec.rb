@@ -17,8 +17,8 @@ describe "Sensu::Extension::Debug" do
       }
     }
     @extension.safe_run(event) do |output, status|
-      output.should eq(event)
-      status.should eq(0)
+      expect(output).to eq(event)
+      expect(status).to eq(0)
     end
   end
 end

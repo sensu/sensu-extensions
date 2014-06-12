@@ -17,8 +17,8 @@ describe "Sensu::Extension::OnlyCheckOutput" do
       }
     }
     @extension.safe_run(event) do |output, status|
-      output.should eq("foo")
-      status.should eq(0)
+      expect(output).to eq("foo")
+      expect(status).to eq(0)
     end
   end
 end

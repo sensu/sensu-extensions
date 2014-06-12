@@ -17,8 +17,8 @@ describe "Sensu::Extension::Json" do
       }
     }
     @extension.safe_run(event) do |output, status|
-      output.should eq(MultiJson.dump(event))
-      status.should eq(0)
+      expect(output).to eq(MultiJson.dump(event))
+      expect(status).to eq(0)
     end
   end
 end
