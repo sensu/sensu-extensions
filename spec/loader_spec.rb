@@ -39,10 +39,10 @@ describe "Sensu::Extensions::Loader" do
     expect(@loader.loaded_files).to be_empty
   end
 
-  it "can load extensions from a directory" do
+  it "can load extensions from a directory containing directory symlinks" do
     @loader.load_directory(@extension_dir)
-    expect(@loader.warnings.size).to eq(6)
-    expect(@loader.loaded_files.size).to eq(2)
+    expect(@loader.warnings.size).to eq(7)
+    expect(@loader.loaded_files.size).to eq(3)
     extension = Sensu::Extension::Test.new
     expect(extension).to respond_to(:name, :description, :definition, :safe_run, :stop, :has_key?, :[])
     extension = Sensu::Extension::MockCheck.new
