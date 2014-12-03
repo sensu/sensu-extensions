@@ -54,6 +54,7 @@ describe "Sensu::Extensions" do
 
   it "can load the built-in extensions" do
     extensions = Sensu::Extensions.load
+    expect(extensions.filter_exists?("attributes")).to be(true)
     expect(extensions.mutator_exists?("json")).to be(true)
     expect(extensions.mutator_exists?("ruby_hash")).to be(true)
     expect(extensions.mutator_exists?("only_check_output")).to be(true)

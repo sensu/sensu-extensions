@@ -79,6 +79,7 @@ describe "Sensu::Extensions::Loader" do
     expect(@loader.all).to include(extension)
     expect(@loader.handler_exists?("debug")).to be(true)
     expect(@loader.mutator_exists?("only_check_output")).to be(true)
+    expect(@loader.filter_exists?("attributes")).to be(true)
   end
 
   it "can load specific extension categories for a sensu client" do
@@ -92,6 +93,7 @@ describe "Sensu::Extensions::Loader" do
     @loader.load_instances("server")
     expect(@loader.handler_exists?("debug")).to be(true)
     expect(@loader.mutator_exists?("only_check_output")).to be(true)
+    expect(@loader.filter_exists?("attributes")).to be(true)
     expect(@loader.check_exists?("mock_check")).to be(false)
   end
 end

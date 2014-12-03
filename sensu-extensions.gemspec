@@ -16,10 +16,14 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "sensu-em"
+  spec.add_dependency "sensu-logger"
+  spec.add_dependency "sensu-settings"
   spec.add_dependency "sensu-extension"
+
   spec.add_dependency "multi_json"
 
   spec.add_development_dependency "bundler", "~> 1.6"
+  spec.add_development_dependency "uuidtools"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "codeclimate-test-reporter"
