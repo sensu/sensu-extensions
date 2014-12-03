@@ -1,0 +1,11 @@
+{
+    "filters": {
+        "production": {
+            "attributes": {
+                "client": {
+                    "environment": "production"
+                }
+            }
+        }
+    }
+}
