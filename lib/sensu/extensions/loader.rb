@@ -80,7 +80,7 @@ module Sensu
       def load_directory(directory)
         warning("loading extension files from directory", :directory => directory)
         path = directory.gsub(/\\(?=\S)/, "/")
-        Dir.glob(File.join(path, "**/*.rb")).each do |file|
+        Dir.glob(File.join(path, "**{,/*/**}/*.rb")).each do |file|
           load_file(file)
         end
       end

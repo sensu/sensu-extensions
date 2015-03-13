@@ -40,14 +40,14 @@ describe "Sensu::Extensions" do
 
   it "can load extensions from a directory" do
     extensions = Sensu::Extensions.load(:extension_dir => @extension_dir)
-    expect(extensions.loaded_files.size).to eq(2)
+    expect(extensions.loaded_files.size).to eq(3)
     expect(extensions.handler_exists?("test")).to be(true)
     expect(extensions.check_exists?("mock_check")).to be(true)
   end
 
   it "can load extensions from one or more directories" do
     extensions = Sensu::Extensions.load(:extension_dirs => [@extension_dir])
-    expect(extensions.loaded_files.size).to eq(2)
+    expect(extensions.loaded_files.size).to eq(3)
     expect(extensions.handler_exists?("test")).to be(true)
     expect(extensions.check_exists?("mock_check")).to be(true)
   end
