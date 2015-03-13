@@ -10,7 +10,7 @@ module Sensu
       end
 
       def run
-        yield 'foo', 0
+        yield "foo", 0
       end
     end
   end
