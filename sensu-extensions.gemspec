@@ -15,7 +15,6 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "sensu-em"
   spec.add_dependency "sensu-logger"
   spec.add_dependency "sensu-settings"
   spec.add_dependency "sensu-extension"
