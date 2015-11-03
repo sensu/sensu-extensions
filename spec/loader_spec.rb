@@ -81,6 +81,7 @@ describe "Sensu::Extensions::Loader" do
     expect(extension_alias).to eq(extension)
     expect(@loader.handlers).to include(extension_alias.definition)
     expect(@loader.all).to include(extension_alias)
+    expect(@loader.all.size).to eq(@loader.all.uniq.size)
     expect(@loader.handler_exists?("debug")).to be(true)
     expect(@loader.mutator_exists?("only_check_output")).to be(true)
   end
