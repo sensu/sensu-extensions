@@ -53,9 +53,9 @@ module Sensu
       # @return [Array<object>] extensions.
       def all
         @extensions.map { |category, extensions|
-          extensions.map do |name, extension|
+          extensions.map { |name, extension|
             extension
-          end
+          }.uniq
         }.flatten
       end
 
@@ -95,6 +95,9 @@ module Sensu
           Extension.const_get(extension_type.capitalize).descendants.each do |klass|
             extension = klass.new
             @extensions[category][extension.name] = extension
+            if extension.name_alias
+              @extensions[category][extension.name_alias] = extension
+            end
             warning("loaded extension", {
               :type => extension_type,
               :name => extension.name,
@@ -111,9 +114,9 @@ module Sensu
       # @param [Symbol] category to retrive.
       # @return [Array<Hash>] category definitions.
       def extension_category(category)
-        @extensions[category].map do |name, extension|
+        @extensions[category].map { |name, extension|
           extension.definition
-        end
+        }.uniq
       end
 
       # Check to see if an extension exists in a category.

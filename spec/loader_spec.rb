@@ -23,7 +23,7 @@ describe "Sensu::Extensions::Loader" do
     expect(@loader.loaded_files.size).to eq(1)
     expect(@loader.loaded_files.first).to eq(File.expand_path(@extension_file))
     extension = Sensu::Extension::Test.new
-    expect(extension).to respond_to(:name, :description, :definition, :safe_run, :stop, :has_key?, :[])
+    expect(extension).to respond_to(:name, :name_alias, :description, :definition, :safe_run, :stop, :has_key?, :[])
   end
 
   it "can attempt to load an extension with a script error" do
@@ -44,9 +44,9 @@ describe "Sensu::Extensions::Loader" do
     expect(@loader.warnings.size).to eq(7)
     expect(@loader.loaded_files.size).to eq(3)
     extension = Sensu::Extension::Test.new
-    expect(extension).to respond_to(:name, :description, :definition, :safe_run, :stop, :has_key?, :[])
+    expect(extension).to respond_to(:name, :name_alias, :description, :definition, :safe_run, :stop, :has_key?, :[])
     extension = Sensu::Extension::MockCheck.new
-    expect(extension).to respond_to(:name, :description, :definition, :safe_run, :stop, :has_key?, :[])
+    expect(extension).to respond_to(:name, :name_alias, :description, :definition, :safe_run, :stop, :has_key?, :[])
   end
 
   it "can attempt to load extensions from a nonexistent directory" do
@@ -60,7 +60,7 @@ describe "Sensu::Extensions::Loader" do
     expect(@loader.handler_exists?("debug")).to be(true)
     extension = @loader[:handlers]["debug"]
     expect(extension).to be_instance_of(Sensu::Extension::Debug)
-    expect(extension).to respond_to(:name, :description, :definition, :safe_run, :stop, :has_key?, :[])
+    expect(extension).to respond_to(:name, :name_alias, :description, :definition, :safe_run, :stop, :has_key?, :[])
     expect(@loader.handlers).to include(extension.definition)
     expect(@loader.all).to include(extension)
     expect(@loader.mutator_exists?("json")).to be(true)
@@ -74,9 +74,13 @@ describe "Sensu::Extensions::Loader" do
     expect(@loader.handler_exists?("test")).to be(true)
     extension = @loader[:handlers]["test"]
     expect(extension).to be_instance_of(Sensu::Extension::Test)
-    expect(extension).to respond_to(:name, :description, :definition, :safe_run, :stop, :has_key?, :[])
+    expect(extension).to respond_to(:name, :name_alias, :description, :definition, :safe_run, :stop, :has_key?, :[])
     expect(@loader.handlers).to include(extension.definition)
     expect(@loader.all).to include(extension)
+    extension_alias = @loader[:handlers]["test_alias"]
+    expect(extension_alias).to eq(extension)
+    expect(@loader.handlers).to include(extension_alias.definition)
+    expect(@loader.all).to include(extension_alias)
     expect(@loader.handler_exists?("debug")).to be(true)
     expect(@loader.mutator_exists?("only_check_output")).to be(true)
   end
