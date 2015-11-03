@@ -5,6 +5,10 @@ module Sensu
         "test"
       end
 
+      def name_alias
+        "test_alias"
+      end
+
       def description
         "test extension"
       end
