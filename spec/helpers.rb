@@ -2,7 +2,7 @@ require "rspec"
 require "eventmachine"
 require "sensu/logger"
 require "sensu/settings"
-require "uuidtools"
+require "securerandom"
 
 unless RUBY_VERSION < "1.9" || RUBY_PLATFORM =~ /java/
   require "codeclimate-test-reporter"
@@ -70,7 +70,7 @@ module Helpers
     check[:status] = 1
     check[:history] = [1]
     {
-      :id => UUIDTools::UUID.random_create.to_s,
+      :id => SecureRandom.uuid,
       :client => client,
       :check => check,
       :occurrences => 1,

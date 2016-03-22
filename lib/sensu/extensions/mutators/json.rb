@@ -1,5 +1,5 @@
 require "sensu/extension"
-require "multi_json"
+require "sensu/json"
 
 module Sensu
   module Extension
@@ -13,7 +13,7 @@ module Sensu
       end
 
       def run(event)
-        yield MultiJson.dump(event), 0
+        yield Sensu::JSON.dump(event), 0
       end
     end
   end
