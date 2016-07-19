@@ -41,10 +41,14 @@ describe "Sensu::Extension::Occurrences" do
             event[:occurrences] = 9
             @extension.safe_run(event) do |output, status|
               expect(status).to eq(0)
-              event[:check][:refresh] = 12
+              event[:check][:refresh] = 10
               @extension.safe_run(event) do |output, status|
-                expect(status).to eq(1)
-                async_done
+                expect(status).to eq(0)
+                event[:check][:refresh] = 12
+                @extension.safe_run(event) do |output, status|
+                  expect(status).to eq(1)
+                  async_done
+                end
               end
             end
           end
