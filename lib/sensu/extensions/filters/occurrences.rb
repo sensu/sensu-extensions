@@ -28,7 +28,7 @@ module Sensu
             return ["not enough occurrences", 0]
           end
           if event[:occurrences] > occurrences && event[:action] == :create
-            interval = event[:check][:interval] || 60
+            interval = check[:interval] || 60
             count = occurrences + refresh.fdiv(interval).to_i
             unless (count == 0 || event[:occurrences] % count == 0)
               return ["only handling every #{count} occurrences", 0]
