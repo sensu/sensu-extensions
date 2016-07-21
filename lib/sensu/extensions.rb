@@ -9,6 +9,7 @@ module Sensu
       # @option options [String] :extension_file to load.
       # @option options [String] :extension_dir to load.
       # @option options [Array] :extension_dirs to load.
+      # @option options [Hash] :extensions to load (gems).
       # @return [Loader] a loaded instance of Loader.
       def load(options={})
         @loader = Loader.new

@@ -19,6 +19,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency "sensu-logger"
   spec.add_dependency "sensu-settings"
   spec.add_dependency "sensu-extension"
+  spec.add_dependency "sensu-extensions-occurrences", "0.0.1"
+  spec.add_dependency "sensu-extensions-only-check-output", "0.0.1"
 
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "rake"

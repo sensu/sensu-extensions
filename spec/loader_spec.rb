@@ -63,6 +63,7 @@ describe "Sensu::Extensions::Loader" do
     expect(extension).to respond_to(:name, :name_alias, :description, :definition, :safe_run, :stop, :has_key?, :[])
     expect(@loader.handlers).to include(extension.definition)
     expect(@loader.all).to include(extension)
+    expect(@loader.filter_exists?("occurrences")).to be(true)
     expect(@loader.mutator_exists?("json")).to be(true)
     expect(@loader.mutator_exists?("ruby_hash")).to be(true)
     expect(@loader.mutator_exists?("only_check_output")).to be(true)
