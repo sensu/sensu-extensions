@@ -64,7 +64,7 @@ describe "Sensu::Extensions" do
   it "can load extensions from gems" do
     options = {
       :extensions => {
-        "system-profile": {
+        "system-profile" => {
           :version => "0.0.2"
         }
       }

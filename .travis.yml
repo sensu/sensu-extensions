@@ -6,14 +6,7 @@ rvm:
   - 2.2.0
   - 2.2.3
   - 2.3.0
-  - jruby-1.7.23
-before_install:
-  - gem update --system
-  - gem --version
-  - gem install bundler --version 1.11.2
+  - jruby-9.0.5.0
 notifications:
   irc:
     - "irc.freenode.net#sensu"
-addons:
-  code_climate:
-    repo_token: e2001d0db82d5835d76a70d025388fee457bd4243fda3e046097e9d6db28fe5d
