@@ -23,6 +23,12 @@ module Sensu
             @loader.load_directory(directory)
           end
         end
+        if options[:extensions]
+          options[:extensions].each do |name, details|
+            gem_name = details[:gem] || "#{GEM_PREFIX}-#{name}"
+            load_gem(gem_name, details[:version])
+          end
+        end
         @loader.load_instances
         @loader
       end

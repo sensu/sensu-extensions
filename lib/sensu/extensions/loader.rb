@@ -1,4 +1,5 @@
 require "sensu/extension"
+require "sensu/extensions/constants"
 require "sensu/extensions/mutators/json"
 require "sensu/extensions/mutators/ruby_hash"
 require "sensu/extensions/mutators/only_check_output"
@@ -15,9 +16,14 @@ module Sensu
       #   @return [Array] loaded extension files.
       attr_reader :loaded_files
 
+      # @!attribute [r] loaded_gems
+      #   @return [Array] loaded extension gems.
+      attr_reader :loaded_gems
+
       def initialize
         @warnings = []
         @loaded_files = []
+        @loaded_gems = []
         @extensions = {}
         Extension::CATEGORIES.each do |category|
           @extensions[category] = {}
@@ -82,6 +88,32 @@ module Sensu
         path = directory.gsub(/\\(?=\S)/, "/")
         Dir.glob(File.join(path, "**{,/*/**}/*.rb")).each do |file|
           load_file(file)
+        end
+      end
+
+      # Load an extension from a Rubygem.
+      #
+      # @param [String] gem name.
+      def load_gem(raw_gem, version=nil)
+        warning("loading extension gem", :gem => raw_gem, :version => version)
+        begin
+          gem(raw_gem, version) if version
+          if raw_gem.starts_with?(GEM_PREFIX)
+            lib = raw_gem.sub(/^#{GEM_PREFIX}/, "")
+            require_path = "sensu/extensions/#{lib}"
+          else
+            require_path = raw_gem
+          end
+          warning("requiring extension gem", :require => require_path)
+          require require_path
+          @loaded_gems << raw_gem
+        rescue ScriptError, StandardError => error
+          warning("failed to require extension", {
+            :gem => raw_gem,
+            :version => version,
+            :error => error
+          })
+          warning("ignoring extension", :gem => raw_gem)
         end
       end
 
