@@ -54,9 +54,22 @@ describe "Sensu::Extensions" do
 
   it "can load the built-in extensions" do
     extensions = Sensu::Extensions.load
+    expect(extensions.filter_exists?("occurrences")).to be(true)
     expect(extensions.mutator_exists?("json")).to be(true)
     expect(extensions.mutator_exists?("ruby_hash")).to be(true)
     expect(extensions.mutator_exists?("only_check_output")).to be(true)
     expect(extensions.handler_exists?("debug")).to be(true)
+  end
+
+  it "can load extensions from gems" do
+    options = {
+      :extensions => {
+        "system-profile": {
+          :version => "0.0.2"
+        }
+      }
+    }
+    extensions = Sensu::Extensions.load(options)
+    expect(extensions.check_exists?("system_profile")).to be(true)
   end
 end

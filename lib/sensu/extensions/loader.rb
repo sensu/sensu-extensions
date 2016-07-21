@@ -99,7 +99,7 @@ module Sensu
         warning("loading extension gem", :gem => raw_gem, :version => version)
         begin
           gem(raw_gem, version) if version
-          if raw_gem.starts_with?(GEM_PREFIX)
+          if raw_gem.start_with?(GEM_PREFIX)
             lib = raw_gem.sub(/^#{GEM_PREFIX}/, "")
             require_path = "sensu/extensions/#{lib}"
           else

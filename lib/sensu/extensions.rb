@@ -26,8 +26,8 @@ module Sensu
         end
         if options[:extensions]
           options[:extensions].each do |name, details|
-            gem_name = details[:gem] || "#{GEM_PREFIX}-#{name}"
-            load_gem(gem_name, details[:version])
+            gem_name = details[:gem] || "#{GEM_PREFIX}#{name}"
+            @loader.load_gem(gem_name, details[:version])
           end
         end
         @loader.load_instances
