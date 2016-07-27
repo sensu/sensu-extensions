@@ -1,10 +1,16 @@
+gem "sensu-extensions-occurrences", "1.0.0"
+gem "sensu-extensions-json", "1.0.0"
+gem "sensu-extensions-ruby-hash", "1.0.0"
+gem "sensu-extensions-only-check-output", "1.0.0"
+gem "sensu-extensions-debug", "1.0.0"
+
 require "sensu/extension"
 require "sensu/extensions/constants"
 require "sensu/extensions/occurrences"
+require "sensu/extensions/json"
+require "sensu/extensions/ruby-hash"
 require "sensu/extensions/only-check-output"
-require "sensu/extensions/mutators/json"
-require "sensu/extensions/mutators/ruby_hash"
-require "sensu/extensions/handlers/debug"
+require "sensu/extensions/debug"
 
 module Sensu
   module Extensions
