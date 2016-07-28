@@ -102,8 +102,9 @@ describe "Sensu::Extensions::Loader" do
   end
 
   it "can load a specific extension from a gem" do
-    @loader.load_gem("sensu-extensions-system-profile", "0.0.2")
+    @loader.load_gem("sensu-extensions-system-profile", "1.0.0")
     @loader.load_instances
+    expect(@loader.loaded_gems).to include("sensu-extensions-system-profile")
     expect(@loader.check_exists?("system_profile")).to be(true)
     extension = @loader[:checks]["system_profile"]
     expect(extension).to be_instance_of(Sensu::Extension::SystemProfile)
