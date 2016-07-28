@@ -9,6 +9,7 @@ module Sensu
       # @option options [String] :extension_file to load.
       # @option options [String] :extension_dir to load.
       # @option options [Array] :extension_dirs to load.
+      # @option options [Hash] :extensions to load (gems).
       # @return [Loader] a loaded instance of Loader.
       def load(options={})
         @loader = Loader.new
@@ -21,6 +22,12 @@ module Sensu
         if options[:extension_dirs]
           options[:extension_dirs].each do |directory|
             @loader.load_directory(directory)
+          end
+        end
+        if options[:extensions]
+          options[:extensions].each do |name, details|
+            gem_name = details[:gem] || "#{GEM_PREFIX}#{name}"
+            @loader.load_gem(gem_name, details[:version])
           end
         end
         @loader.load_instances

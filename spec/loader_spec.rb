@@ -63,6 +63,7 @@ describe "Sensu::Extensions::Loader" do
     expect(extension).to respond_to(:name, :name_alias, :description, :definition, :safe_run, :stop, :has_key?, :[])
     expect(@loader.handlers).to include(extension.definition)
     expect(@loader.all).to include(extension)
+    expect(@loader.filter_exists?("occurrences")).to be(true)
     expect(@loader.mutator_exists?("json")).to be(true)
     expect(@loader.mutator_exists?("ruby_hash")).to be(true)
     expect(@loader.mutator_exists?("only_check_output")).to be(true)
@@ -98,5 +99,17 @@ describe "Sensu::Extensions::Loader" do
     expect(@loader.handler_exists?("debug")).to be(true)
     expect(@loader.mutator_exists?("only_check_output")).to be(true)
     expect(@loader.check_exists?("mock_check")).to be(false)
+  end
+
+  it "can load a specific extension from a gem" do
+    @loader.load_gem("sensu-extensions-system-profile", "1.0.0")
+    @loader.load_instances
+    expect(@loader.loaded_gems).to include("sensu-extensions-system-profile")
+    expect(@loader.check_exists?("system_profile")).to be(true)
+    extension = @loader[:checks]["system_profile"]
+    expect(extension).to be_instance_of(Sensu::Extension::SystemProfile)
+    expect(extension).to respond_to(:name, :name_alias, :description, :definition, :safe_run, :stop, :has_key?, :[])
+    expect(@loader.checks).to include(extension.definition)
+    expect(@loader.all).to include(extension)
   end
 end
