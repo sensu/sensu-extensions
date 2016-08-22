@@ -1,4 +1,4 @@
-gem "sensu-extensions-occurrences", "1.0.0"
+gem "sensu-extensions-occurrences", "1.1.0"
 gem "sensu-extensions-json", "1.0.0"
 gem "sensu-extensions-ruby-hash", "1.0.0"
 gem "sensu-extensions-only-check-output", "1.0.0"
