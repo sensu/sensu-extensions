@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "sensu-settings"
   spec.add_dependency "sensu-extension"
   spec.add_dependency "sensu-extensions-occurrences", "1.1.0"
-  spec.add_dependency "sensu-extensions-check-dependencies", "1.0.0"
+  spec.add_dependency "sensu-extensions-check-dependencies", "1.0.1"
   spec.add_dependency "sensu-extensions-json", "1.0.0"
   spec.add_dependency "sensu-extensions-ruby-hash", "1.0.0"
   spec.add_dependency "sensu-extensions-only-check-output", "1.0.0"
