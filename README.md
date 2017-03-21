@@ -1,9 +1,8 @@
 # Sensu::Extensions
 
 [![Build Status](https://travis-ci.org/sensu/sensu-extensions.svg?branch=master)](https://travis-ci.org/sensu/sensu-extensions)
-
-[![Code Climate](https://codeclimate.com/github/sensu/sensu-extensions.png)](https://codeclimate.com/github/sensu/sensu-extensions)
-[![Code Climate Coverage](https://codeclimate.com/github/sensu/sensu-extensions/coverage.png)](https://codeclimate.com/github/sensu/sensu-extensions)
+![Gem Version](https://img.shields.io/gem/v/sensu-extensions.svg)
+![MIT Licensed](https://img.shields.io/github/license/sensu/sensu.svg)
 
 ## Installation
 
