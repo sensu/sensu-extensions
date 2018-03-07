@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
   spec.name          = "sensu-extensions"
   spec.version       = "1.9.0"
   spec.authors       = ["Sean Porter"]
-  spec.email         = ["portertech@gmail.com"]
+  spec.email         = ["portertech@gmail.com", "engineering@sensu.io"]
   spec.summary       = "The Sensu extension loader library"
   spec.description   = "The Sensu extension loader library"
   spec.homepage      = "https://github.com/sensu/sensu-extensions"
@@ -31,4 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "sensu-extensions-system-profile", "1.0.0"
   spec.add_development_dependency "bouncy-castle-java" if RUBY_PLATFORM =~ /java/
+
+  spec.cert_chain    = ["certs/sensu.pem"]
+  spec.signing_key   = File.expand_path("~/.ssh/gem-sensu-private_key.pem") if $0 =~ /gem\z/
 end
