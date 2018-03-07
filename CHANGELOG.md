@@ -1,5 +1,14 @@
 # Change Log
 
+## [Unreleased](https://github.com/sensu/sensu-extensions/tree/HEAD)
+
+[Full Changelog](https://github.com/sensu/sensu-extensions/compare/v1.9.0...HEAD)
+
+**Merged pull requests:**
+
+- Sign the sensu-extensions Ruby gem [\#18](https://github.com/sensu/sensu-extensions/pull/18) ([portertech](https://github.com/portertech))
+- Implement automated changelog generation [\#17](https://github.com/sensu/sensu-extensions/pull/17) ([cwjohnston](https://github.com/cwjohnston))
+
 ## [v1.9.0](https://github.com/sensu/sensu-extensions/tree/v1.9.0) (2017-03-22)
 [Full Changelog](https://github.com/sensu/sensu-extensions/compare/v1.8.0...v1.9.0)
 
@@ -9,6 +18,10 @@
 
 ## [v1.8.0](https://github.com/sensu/sensu-extensions/tree/v1.8.0) (2017-03-20)
 [Full Changelog](https://github.com/sensu/sensu-extensions/compare/v1.7.1...v1.8.0)
+
+**Closed issues:**
+
+- Question : How to package Sensu Extensions for distribution [\#6](https://github.com/sensu/sensu-extensions/issues/6)
 
 **Merged pull requests:**
 
@@ -27,6 +40,11 @@
 
 ## [v1.6.0](https://github.com/sensu/sensu-extensions/tree/v1.6.0) (2016-07-28)
 [Full Changelog](https://github.com/sensu/sensu-extensions/compare/v1.5.0...v1.6.0)
+
+**Closed issues:**
+
+- Create an "occurrences" built-in filter for core [\#10](https://github.com/sensu/sensu-extensions/issues/10)
+- Invalid Gem v1.4.0 test suite [\#9](https://github.com/sensu/sensu-extensions/issues/9)
 
 **Merged pull requests:**
 
