@@ -1,5 +1,16 @@
 # Change Log
 
+## [v1.10.0](https://github.com/sensu/sensu-extensions/tree/v1.10.0) (2018-08-10)
+[Full Changelog](https://github.com/sensu/sensu-extensions/compare/v1.9.1...v1.10.0)
+
+**Closed issues:**
+
+- Upgrade check-dependencies to 1.1.0 [\#19](https://github.com/sensu/sensu-extensions/issues/19)
+
+**Merged pull requests:**
+
+- Include check dependencies 1.1.0 [\#20](https://github.com/sensu/sensu-extensions/pull/20) ([portertech](https://github.com/portertech))
+
 ## [v1.9.1](https://github.com/sensu/sensu-extensions/tree/v1.9.1) (2018-03-07)
 [Full Changelog](https://github.com/sensu/sensu-extensions/compare/v1.9.0...v1.9.1)
 
