@@ -59,6 +59,7 @@ describe "Sensu::Extensions" do
     expect(extensions.mutator_exists?("ruby_hash")).to be(true)
     expect(extensions.mutator_exists?("only_check_output")).to be(true)
     expect(extensions.handler_exists?("debug")).to be(true)
+    expect(extensions.handler_exists?("deregistration")).to be(true)
   end
 
   it "can load extensions from gems" do

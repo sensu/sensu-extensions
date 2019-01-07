@@ -67,6 +67,7 @@ describe "Sensu::Extensions::Loader" do
     expect(@loader.mutator_exists?("json")).to be(true)
     expect(@loader.mutator_exists?("ruby_hash")).to be(true)
     expect(@loader.mutator_exists?("only_check_output")).to be(true)
+    expect(@loader.handler_exists?("deregistration")).to be(true)
   end
 
   it "can load instances of the built-in and loaded extensions" do

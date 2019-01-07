@@ -25,6 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "sensu-extensions-ruby-hash", "1.0.0"
   spec.add_dependency "sensu-extensions-only-check-output", "1.0.0"
   spec.add_dependency "sensu-extensions-debug", "1.0.0"
+  spec.add_dependency "sensu-extensions-deregistration", "1.0.0"
 
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "rake"
