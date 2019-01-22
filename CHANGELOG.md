@@ -1,11 +1,15 @@
 # Change Log
 
+## [Unreleased](https://github.com/sensu/sensu-extensions/tree/HEAD)
+
+[Full Changelog](https://github.com/sensu/sensu-extensions/compare/v1.10.0...HEAD)
+
+**Merged pull requests:**
+
+- Add sensu-extensions-deregistration handler [\#21](https://github.com/sensu/sensu-extensions/pull/21) ([amdprophet](https://github.com/amdprophet))
+
 ## [v1.10.0](https://github.com/sensu/sensu-extensions/tree/v1.10.0) (2018-08-10)
 [Full Changelog](https://github.com/sensu/sensu-extensions/compare/v1.9.1...v1.10.0)
-
-**Closed issues:**
-
-- Upgrade check-dependencies to 1.1.0 [\#19](https://github.com/sensu/sensu-extensions/issues/19)
 
 **Merged pull requests:**
 
@@ -29,10 +33,6 @@
 ## [v1.8.0](https://github.com/sensu/sensu-extensions/tree/v1.8.0) (2017-03-20)
 [Full Changelog](https://github.com/sensu/sensu-extensions/compare/v1.7.1...v1.8.0)
 
-**Closed issues:**
-
-- Question : How to package Sensu Extensions for distribution [\#6](https://github.com/sensu/sensu-extensions/issues/6)
-
 **Merged pull requests:**
 
 - Add ruby 2.4.0 to .travis.yml [\#15](https://github.com/sensu/sensu-extensions/pull/15) ([amdprophet](https://github.com/amdprophet))
@@ -50,11 +50,6 @@
 
 ## [v1.6.0](https://github.com/sensu/sensu-extensions/tree/v1.6.0) (2016-07-28)
 [Full Changelog](https://github.com/sensu/sensu-extensions/compare/v1.5.0...v1.6.0)
-
-**Closed issues:**
-
-- Create an "occurrences" built-in filter for core [\#10](https://github.com/sensu/sensu-extensions/issues/10)
-- Invalid Gem v1.4.0 test suite [\#9](https://github.com/sensu/sensu-extensions/issues/9)
 
 **Merged pull requests:**
 
