@@ -4,6 +4,7 @@ gem "sensu-extensions-json", "1.0.0"
 gem "sensu-extensions-ruby-hash", "1.0.0"
 gem "sensu-extensions-only-check-output", "1.0.0"
 gem "sensu-extensions-debug", "1.0.0"
+gem "sensu-extensions-deregistration", "1.0.0"
 
 require "sensu/extension"
 require "sensu/extensions/constants"
@@ -13,6 +14,7 @@ require "sensu/extensions/json"
 require "sensu/extensions/ruby-hash"
 require "sensu/extensions/only-check-output"
 require "sensu/extensions/debug"
+require "sensu/extensions/deregistration"
 
 module Sensu
   module Extensions
