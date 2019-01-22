@@ -1,8 +1,7 @@
 # Change Log
 
-## [Unreleased](https://github.com/sensu/sensu-extensions/tree/HEAD)
-
-[Full Changelog](https://github.com/sensu/sensu-extensions/compare/v1.10.0...HEAD)
+## [v1.11.0](https://github.com/sensu/sensu-extensions/tree/v1.11.0) (2019-01-22)
+[Full Changelog](https://github.com/sensu/sensu-extensions/compare/v1.10.0...v1.11.0)
 
 **Merged pull requests:**
 
